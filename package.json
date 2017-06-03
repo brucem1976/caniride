@@ -1,0 +1,19 @@
+{
+  "name": "caniride",
+  "version": "1.0.0",
+  "description": "Web App to Store and Display open/closed MTB trails in an area",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brucem1976/caniride.git"
+  },
+  "author": "Bruce Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brucem1976/caniride/issues"
+  },
+  "homepage": "https://github.com/brucem1976/caniride#readme"
+}
