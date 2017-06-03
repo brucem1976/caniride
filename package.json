@@ -2,7 +2,7 @@
   "name": "caniride",
   "version": "1.0.0",
   "description": "Web App to Store and Display open/closed MTB trails in an area",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
