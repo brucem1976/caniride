@@ -9,7 +9,15 @@ var fetchTrails = () => {
 };
 
 var saveTrails = (trails) => {
-  fs.writeFileSync('trails.json',JSON.stringify(trails));
+  var s = "";
+  if(trails) {
+    s = JSON.stringify(trails);
+  }
+  fs.writeFileSync('trails.json',s);
+};
+
+var deleteAllTrails = () => {
+  saveTrails(null);
 };
 
 var addTrail = (name, parentID) => {

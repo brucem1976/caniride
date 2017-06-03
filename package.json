@@ -4,7 +4,8 @@
   "description": "Web App to Store and Display open/closed MTB trails in an area",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/brucem1976/caniride/issues"
   },
-  "homepage": "https://github.com/brucem1976/caniride#readme"
+  "homepage": "https://github.com/brucem1976/caniride#readme",
+  "devDependencies": {
+    "expect": "^1.20.2"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }
