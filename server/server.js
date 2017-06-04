@@ -1,6 +1,9 @@
 const trails = require('./trails.js');
 const express = require('express');
 
+// for Heroku hosting
+const port = process.env.PORT || 3000;
+
 //var readTrailString = fs.readFileSync('trails.json');
 //var trails = JSON.parse(readTrailString);
 //console.log(trails.trailName);
@@ -34,4 +37,4 @@ app.get('/', (req, res) => {
   res.send(resString);
 });
 
-app.listen(3000);
+app.listen(port);
