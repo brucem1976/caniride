@@ -94,4 +94,31 @@ var removeTrail = (ID) => {
 
 };
 
-module.exports = { addTrail, modifyTrail, removeTrail };
+// return array of all Parent trails
+var getAllParents = () => {
+  var t = fetchTrails();
+  var trails = [];
+  
+  for (var trail of t) {
+    if(trail.parentID === -1) {
+      trails.push(trail);
+    }
+  }
+  return trails;
+};
+
+// return array of all Child trails for a specific Parent
+var getAllChildren = (parentID) => {
+  var t = fetchTrails();
+  var trails = [];
+  
+  for (var trail of t) {
+    if(trail.parentID === parentID) {
+      trails.push(trail);
+    }
+  }
+  return trails;
+};
+
+
+module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren };
