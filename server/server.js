@@ -10,11 +10,15 @@ const publicPath = path.join(__dirname, '../public');
 //var trails = JSON.parse(readTrailString);
 //console.log(trails.trailName);
 
+//trails.addTrail('Meerendal',-1);
+//var t1 = trails.addTrail('Bloemendal',-1);
+//var t2 = trails.addTrail('B-Spot',t1.ID);
+//trails.modifyTrail(t1.ID,"Bloom",true,"Like fully");
+trails.deleteAllTrails();
 trails.addTrail('Meerendal',-1);
 var t1 = trails.addTrail('Bloemendal',-1);
 var t2 = trails.addTrail('B-Spot',t1.ID);
-trails.modifyTrail(t1.ID,"Bloom",true,"Like fully");
-//trails.removeTrail(t2.ID);
+trails.modifyTrail(t1.ID, 'Bloemendal', true, "test status");
 
 var app = express();
 
@@ -38,7 +42,11 @@ app.get('/json', (req, res) => {
   //   }
   // }
   // resString += "</ul>";
-  var parents = trails.fetchTrails();
+  var parents = trails.getAllParents();
+  for(var i=0;i<parents.length;i++) {
+    var children = trails.getAllChildren(parents[i].ID);
+    parents[i].children = children;
+  }
   var resString = JSON.stringify(parents);
   res.send(resString);
 });

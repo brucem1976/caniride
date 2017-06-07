@@ -35,10 +35,10 @@ height: 6px;
 display: block;
 line-height: 0;
 }
-.dot-red {
+.dot-false {
 background: #990000;
 }
-.dot-green {
+.dot-true {
 background: #009900;
 }
 .dot-yellow {

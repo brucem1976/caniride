@@ -121,4 +121,4 @@ var getAllChildren = (parentID) => {
 };
 
 
-module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren, fetchTrails };
+module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren, fetchTrails, deleteAllTrails };
