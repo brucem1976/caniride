@@ -16,7 +16,13 @@ const publicPath = path.join(__dirname, '../public');
 //trails.modifyTrail(t1.ID,"Bloom",true,"Like fully");
 trails.deleteAllTrails();
 trails.addTrail('Meerendal',-1);
+
+var waitTill = new Date(new Date().getTime() + 10);
+while(waitTill > new Date()){}
+
 var t1 = trails.addTrail('Bloemendal',-1);
+waitTill = new Date(new Date().getTime() + 10);
+while(waitTill > new Date()){}
 var t2 = trails.addTrail('B-Spot',t1.ID);
 trails.modifyTrail(t1.ID, 'Bloemendal', true, "test status");
 
