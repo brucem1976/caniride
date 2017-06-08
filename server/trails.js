@@ -56,6 +56,24 @@ var modifyTrail = (ID, name, open, status) => {
   return null;
 };
 
+var changeOpen = (ID) => {
+  var trails = fetchTrails();
+  
+  if(!trails.length) {
+    return null;
+  }
+  
+  for (var trail of trails) {
+    if(trail.ID === ID) {
+      trail.trailOpen = !trail.trailOpen;
+      saveTrails(trails);
+      return trail;
+    }
+  }
+  
+  return null;
+};
+
 var removeTrail = (ID) => {
   var trails = fetchTrails();
   var trail = null;
@@ -121,4 +139,4 @@ var getAllChildren = (parentID) => {
 };
 
 
-module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren, fetchTrails, deleteAllTrails };
+module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren, fetchTrails, deleteAllTrails, changeOpen };

@@ -2,6 +2,10 @@
 /*Yellow - <span class="dot dot-yellow"><span class="dot-inner"></span></span>*/
 /*Green - <span class="dot dot-green"><span class="dot-inner"></span></span>*/
 
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
 .dot {
 overflow: hidden;
 border-style:solid;
@@ -40,6 +44,18 @@ background: #990000;
 }
 .dot-true {
 background: #009900;
+}
+
+.sub-dot-false {
+background: #990000;
+width: 15px;
+height:15px;
+  
+}
+.sub-dot-true {
+background: #009900;
+width: 15px;
+height:15px;
 }
 .dot-yellow {
 background: #999900;

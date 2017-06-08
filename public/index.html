@@ -18,7 +18,7 @@
       {{trail.trailName}}
       <ul style="list-style-type:none" v-if="trail.children==[] ? false : true">
         <li v-for="child in trail.children" v-bind:id="child.ID">
-          <span v-bind:class="'dot dot-' + child.trailOpen" v-on:click="changeOpen(child.ID)">
+          <span v-bind:class="'dot sub-dot-' + child.trailOpen" v-on:click="changeOpen(child.ID)">
             <span class="dot-inner">
             </span>
           </span>

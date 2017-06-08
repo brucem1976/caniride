@@ -10,11 +10,15 @@ new Vue({
       for(var i=0; i<this.trails.length; i++) {
         if(this.trails[i].ID === ID) {
           this.trails[i].trailOpen = !this.trails[i].trailOpen;
+          this.$http.post('../change',this.trails[i]).then(function (response) {
+          },function(response) {});
           return;
         }
         for(var j=0; j<this.trails[i].children.length; j++) {
           if(this.trails[i].children[j].ID === ID) {
           this.trails[i].children[j].trailOpen = !this.trails[i].children[j].trailOpen;
+          this.$http.post('../change',this.trails[i].children[j]).then(function (response) {
+          },function (response) {});
           return;
           }
         }
