@@ -21,81 +21,81 @@ const publicPath = path.join(__dirname, '../public');
 
 
 
-trails.deleteAllTrails();
+// trails.deleteAllTrails();
 
-var t = trails.addTrail('Meerendal',-1);
+// var t = trails.addTrail('Meerendal',-1);
 
-var waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Dorstberg',t.ID);
+// var waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Dorstberg',t.ID);
 
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-t = trails.addTrail('Bloemendal',-1);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('B-Spot',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail("Lombard's Terra",t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Green Belt to Hillcrest',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Green Belt to Odendal Rd',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Bloemslang',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Bloemendaaler',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// t = trails.addTrail('Bloemendal',-1);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('B-Spot',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail("Lombard's Terra",t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Green Belt to Hillcrest',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Green Belt to Odendal Rd',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Bloemslang',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Bloemendaaler',t.ID);
 
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-t = trails.addTrail('Hoogekraal',-1);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('The Ravine',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail("The Cobra",t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Trail Z',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// t = trails.addTrail('Hoogekraal',-1);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('The Ravine',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail("The Cobra",t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Trail Z',t.ID);
 
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-t = trails.addTrail('Hillcrest',-1);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Rooikat',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail("Green Olive",t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Corridor to Contermans',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// t = trails.addTrail('Hillcrest',-1);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Rooikat',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail("Green Olive",t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Corridor to Contermans',t.ID);
 
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-t = trails.addTrail('Contermanskloof',-1);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('Green Loop',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail("Blue Loop",t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('DH1',t.ID);
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-trails.addTrail('DH2',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// t = trails.addTrail('Contermanskloof',-1);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('Green Loop',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail("Blue Loop",t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('DH1',t.ID);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// trails.addTrail('DH2',t.ID);
 
-waitTill = new Date(new Date().getTime() + 10);
-while(waitTill > new Date()){}
-t = trails.addTrail('Majik Forest',-1);
+// waitTill = new Date(new Date().getTime() + 10);
+// while(waitTill > new Date()){}
+// t = trails.addTrail('Majik Forest',-1);
 
 var app = express();
 
