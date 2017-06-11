@@ -176,7 +176,7 @@ var getAllParents = () => {
     }
   }
   
-  updateFromDB();
+  //updateFromDB();
 
   return trails;
 };
