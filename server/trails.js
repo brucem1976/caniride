@@ -14,84 +14,112 @@ var allTrails = [];
 
 var ref = db.ref("/");
 
-ref.once("value", function(snapshot) {
-  allTrails = snapshot.val();
-});
-
-
-var fetchTrails = () => {
-  return allTrails;
-  // try {
-  //   return JSON.parse(fs.readFileSync('trails.json'));
-  // } catch(e) {
-  // }
-
-  // return [];
+var updateFromDB = () => {
+  ref.once("value", function(snapshot) {
+    console.log("DB retrieved!");
+    allTrails = [];
+    snapshot.forEach(function(childSnapshot) {
+      var newTrail = {
+        key: childSnapshot.key,
+        val: childSnapshot.val()
+      };
+      allTrails.push(newTrail);
+    });
+  });
 };
 
-var saveTrails = (trails) => {
-  var s = "";
-  if(trails) {
-    for(var i=0; i<trails.length; i++) {
-      delete trails[i]["children"];
+updateFromDB();
+// var fetchTrails = () => {
+  
+//   return allTrails;
+//   // try {
+//   //   return JSON.parse(fs.readFileSync('trails.json'));
+//   // } catch(e) {
+//   // }
+
+//   // return [];
+// };
+
+var updateTrail = (ID) => {
+  var key = -1;
+  var trail;
+  
+  for(var i=0; i<allTrails.length; i++) {
+    if(allTrails[i].val.ID === ID) {
+      delete allTrails[i].val.children;
+      allTrails[i].val.trailOpen = !allTrails[i].val.trailOpen;
+      key = allTrails[i].key;
+      trail = allTrails[i];
+      break;
     }
-    s = JSON.stringify(trails);
   }
-  ref.set(trails);
+    //s = JSON.stringify(allTrails);
+
+  // here we must find the key for only the ID, and update only it
+  if(key != -1) {
+    console.log("Updating ", trail.val.trailName, " key ", trail.key," to ",trail.val.trailOpen);
+    var ob = {
+      trailOpen: trail.val.trailOpen
+    };
+    db.ref('/' + trail.key).update(ob).then(updateFromDB());
+  }
+  
+  //allTrails = trails;
+  //ref.set(allTrails);
   //fs.writeFileSync('trails.json',s);
 };
 
-var deleteAllTrails = () => {
-  saveTrails(null);
-};
+// var deleteAllTrails = () => {
+//   saveTrails(null);
+// };
 
-var addTrail = (name, parentID) => {
-  var trails = fetchTrails();
+// var addTrail = (name, parentID) => {
+//   var trails = fetchTrails();
   
-  var trail = {
-    ID: Date.now(),
-    trailName: name,
-    trailOpen: false,
-    trailStatus: "",
-    parentID: parentID
-  };
+//   var trail = {
+//     ID: Date.now(),
+//     trailName: name,
+//     trailOpen: false,
+//     trailStatus: "",
+//     parentID: parentID
+//   };
   
-  trails.push(trail);
-  saveTrails(trails);
-  return trail;
-};
+//   trails.push(trail);
+//   saveTrails(trails);
+//   return trail;
+// };
 
-var modifyTrail = (ID, name, open, status) => {
-  var trails = fetchTrails();
+// var modifyTrail = (ID, name, open, status) => {
+//   var trails = fetchTrails();
   
-  if(!trails.length) {
-    return null;
-  }
+//   if(!trails.length) {
+//     return null;
+//   }
   
-  for (var trail of trails) {
-    if(trail.ID === ID) {
-      trail.trailName = name;
-      trail.trailOpen = open;
-      trail.trailStatus = status;
-      saveTrails(trails);
-      return trail;
-    }
-  }
+//   for (var trail of trails) {
+//     if(trail.ID === ID) {
+//       trail.trailName = name;
+//       trail.trailOpen = open;
+//       trail.trailStatus = status;
+//       saveTrails(trails);
+//       return trail;
+//     }
+//   }
   
-  return null;
-};
+//   return null;
+// };
 
 var changeOpen = (ID) => {
-  var trails = fetchTrails();
+  //var trails = fetchTrails();
   
-  if(!trails.length) {
+  if(!allTrails.length) {
     return null;
   }
   
-  for (var trail of trails) {
-    if(trail.ID === ID) {
-      trail.trailOpen = !trail.trailOpen;
-      saveTrails(trails);
+  for (var trail of allTrails) {
+    if(trail.val.ID === ID) {
+      //trail.trailOpen = !trail.trailOpen;
+      updateTrail(ID); // remember to invert "trailOpen"
       return trail;
     }
   }
@@ -99,69 +127,72 @@ var changeOpen = (ID) => {
   return null;
 };
 
-var removeTrail = (ID) => {
-  var trails = fetchTrails();
-  var trail = null;
-  if(!trails.length) {
-    return null;
-  }
+// var removeTrail = (ID) => {
+//   var trails = fetchTrails();
+//   var trail = null;
+//   if(!trails.length) {
+//     return null;
+//   }
   
-  var itemsToRemove = [];
+//   var itemsToRemove = [];
   
-  for (var i=0; i<trails.length; i++) {
-    if((trails[i].ID === ID)||(trails[i].parentID === ID)) {
-      itemsToRemove.push(i);
+//   for (var i=0; i<trails.length; i++) {
+//     if((trails[i].ID === ID)||(trails[i].parentID === ID)) {
+//       itemsToRemove.push(i);
       
-      if(trails[i].ID === ID) {
-        trail = trails[i];
-      }
-      //console.log("Will remove item ",i);
-    }
-  }
+//       if(trails[i].ID === ID) {
+//         trail = trails[i];
+//       }
+//       //console.log("Will remove item ",i);
+//     }
+//   }
   
-  if(!itemsToRemove.length) {
-    return null;
-  }
+//   if(!itemsToRemove.length) {
+//     return null;
+//   }
   
-  //console.log("Remove Array: ",itemsToRemove);
+//   //console.log("Remove Array: ",itemsToRemove);
   
-  var k = 0;
-  for(var j=0; j<itemsToRemove.length; j++) {
-    trails.splice(itemsToRemove[j]-k,1);
-    //console.log("Spliced out: ",itemsToRemove[j]-k);
-    k++;
-  }
+//   var k = 0;
+//   for(var j=0; j<itemsToRemove.length; j++) {
+//     trails.splice(itemsToRemove[j]-k,1);
+//     //console.log("Spliced out: ",itemsToRemove[j]-k);
+//     k++;
+//   }
   
-  saveTrails(trails);
-  return trail;
+//   saveTrails(trails);
+//   return trail;
 
-};
+// };
 
 // return array of all Parent trails
 var getAllParents = () => {
-  var t = fetchTrails();
-  var trails = [];
+  //var t = fetchTrails();
+  let trails = [];
 
-  for (var trail of t) {
-    if(trail.parentID === -1) {
-      trails.push(trail);
+  for (let trail of allTrails) {
+    if(trail.val.parentID === -1) {
+      trails.push(trail.val);
     }
   }
+  
+  updateFromDB();
+
   return trails;
 };
 
 // return array of all Child trails for a specific Parent
 var getAllChildren = (parentID) => {
-  var t = fetchTrails();
-  var trails = [];
+  //var t = fetchTrails();
+  let trails = [];
   
-    for (var trail of t) {
-      if(trail.parentID === parentID) {
-        trails.push(trail);
+    for (let trail of allTrails) {
+      if(trail.val.parentID === parentID) {
+        trails.push(trail.val);
       }
     }
   return trails;
 };
 
 
-module.exports = { addTrail, modifyTrail, removeTrail, getAllParents, getAllChildren, fetchTrails, deleteAllTrails, changeOpen };
+module.exports = { getAllParents, getAllChildren, changeOpen };
