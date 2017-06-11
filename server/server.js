@@ -7,20 +7,6 @@ const path = require('path');
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, '../public');
 
-//var readTrailString = fs.readFileSync('trails.json');
-//var trails = JSON.parse(readTrailString);
-//console.log(trails.trailName);
-
-//trails.addTrail('Meerendal',-1);
-//var t1 = trails.addTrail('Bloemendal',-1);
-//var t2 = trails.addTrail('B-Spot',t1.ID);
-//trails.modifyTrail(t1.ID,"Bloom",true,"Like fully");
-
-
-
-
-
-
 // trails.deleteAllTrails();
 
 // var t = trails.addTrail('Meerendal',-1);

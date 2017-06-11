@@ -1,19 +1,44 @@
 const fs = require('fs');
+var admin = require("firebase-admin");
+var serviceAccount = require("../can-i-ride-170109-firebase-adminsdk-28jaz-5773b7fdda.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://can-i-ride-170109.firebaseio.com"
+});
+  
+// As an admin, the app has access to read and write all data regardless of Security Rules
+var db = admin.database();
+  
+var allTrails = [];
+
+var ref = db.ref("/");
+
+ref.once("value", function(snapshot) {
+  allTrails = snapshot.val();
+});
+
 
 var fetchTrails = () => {
-  try {
-    return JSON.parse(fs.readFileSync('trails.json'));
-  } catch(e) {
-  }
-  return [];
+  return allTrails;
+  // try {
+  //   return JSON.parse(fs.readFileSync('trails.json'));
+  // } catch(e) {
+  // }
+
+  // return [];
 };
 
 var saveTrails = (trails) => {
   var s = "";
   if(trails) {
+    for(var i=0; i<trails.length; i++) {
+      delete trails[i]["children"];
+    }
     s = JSON.stringify(trails);
   }
-  fs.writeFileSync('trails.json',s);
+  ref.set(trails);
+  //fs.writeFileSync('trails.json',s);
 };
 
 var deleteAllTrails = () => {
@@ -116,7 +141,7 @@ var removeTrail = (ID) => {
 var getAllParents = () => {
   var t = fetchTrails();
   var trails = [];
-  
+
   for (var trail of t) {
     if(trail.parentID === -1) {
       trails.push(trail);
@@ -130,11 +155,11 @@ var getAllChildren = (parentID) => {
   var t = fetchTrails();
   var trails = [];
   
-  for (var trail of t) {
-    if(trail.parentID === parentID) {
-      trails.push(trail);
+    for (var trail of t) {
+      if(trail.parentID === parentID) {
+        trails.push(trail);
+      }
     }
-  }
   return trails;
 };
 
