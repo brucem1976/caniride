@@ -29,18 +29,8 @@ var updateFromDB = () => {
 };
 
 updateFromDB();
-// var fetchTrails = () => {
-  
-//   return allTrails;
-//   // try {
-//   //   return JSON.parse(fs.readFileSync('trails.json'));
-//   // } catch(e) {
-//   // }
 
-//   // return [];
-// };
-
-var updateTrail = (ID) => {
+var updateTrail = (ID,res) => {
   var key = -1;
   var trail;
   
@@ -57,69 +47,53 @@ var updateTrail = (ID) => {
 
   // here we must find the key for only the ID, and update only it
   if(key != -1) {
-    console.log("Updating ", trail.val.trailName, " key ", trail.key," to ",trail.val.trailOpen);
+    //console.log("Updating ", trail.val.trailName, " key ", trail.key," to ",trail.val.trailOpen);
     var ob = {
       trailOpen: trail.val.trailOpen
     };
-    db.ref('/' + trail.key).update(ob).then(updateFromDB());
+    db.ref('/' + trail.key).update(ob).then((response) => {
+      //console.log("Sending 200!", response);
+      //return res.send(trail.val);
+    }).then((response) => {
+      ref.once("value", function(snapshot) {
+        console.log("DB retrieved again!");
+        allTrails = [];
+        snapshot.forEach(function(childSnapshot) {
+          var newTrail = {
+            key: childSnapshot.key,
+            val: childSnapshot.val()
+          };
+          allTrails.push(newTrail);
+        });
+        var trails = getAllParents();
+        for(var i=0; i<trails.length; i++) {
+          trails[i].children = getAllChildren(trails[i].ID);
+        }
+        console.log("Sending all trails to client");
+        return res.send(trails);
+      });
+    }).catch(function() {
+      console.log("Promise rejected!");
+      console.log("Sending 404!");
+      return res.send(trail.val).sendStatus(404);
+    });
+  }  else {
+    res.sendStatus(404);
   }
-  
-  //allTrails = trails;
-  //ref.set(allTrails);
-  //fs.writeFileSync('trails.json',s);
-};
+}
 
-// var deleteAllTrails = () => {
-//   saveTrails(null);
-// };
-
-// var addTrail = (name, parentID) => {
-//   var trails = fetchTrails();
-  
-//   var trail = {
-//     ID: Date.now(),
-//     trailName: name,
-//     trailOpen: false,
-//     trailStatus: "",
-//     parentID: parentID
-//   };
-  
-//   trails.push(trail);
-//   saveTrails(trails);
-//   return trail;
-// };
-
-// var modifyTrail = (ID, name, open, status) => {
-//   var trails = fetchTrails();
-  
-//   if(!trails.length) {
-//     return null;
-//   }
-  
-//   for (var trail of trails) {
-//     if(trail.ID === ID) {
-//       trail.trailName = name;
-//       trail.trailOpen = open;
-//       trail.trailStatus = status;
-//       saveTrails(trails);
-//       return trail;
-//     }
-//   }
-  
-//   return null;
-// };
-
-var changeOpen = (ID) => {
+var changeOpen = (ID, res) => {
   //var trails = fetchTrails();
   
   if(!allTrails.length) {
+    res.sendStatus(404);
     return null;
   }
   
   for (var trail of allTrails) {
     if(trail.val.ID === ID) {
       //trail.trailOpen = !trail.trailOpen;
-      updateTrail(ID); // remember to invert "trailOpen"
+      updateTrail(ID,res); // remember to invert "trailOpen"
       return trail;
     }
   }

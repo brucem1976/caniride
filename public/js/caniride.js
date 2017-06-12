@@ -13,15 +13,19 @@ new Vue({
       for(var i=0; i<this.trails.length; i++) {
         if(this.trails[i].ID === ID) {
           this.trails[i].trailOpen = !this.trails[i].trailOpen;
-          this.$http.post('../change',this.trails[i]).then(function (response) {
-          },function(response) {});
+          this.$http.post('../change',this.trails[i]).then(response => {
+            //console.log("Response:", response.body);
+            this.trails = response.body;
+          });
           return;
         }
         for(var j=0; j<this.trails[i].children.length; j++) {
           if(this.trails[i].children[j].ID === ID) {
           this.trails[i].children[j].trailOpen = !this.trails[i].children[j].trailOpen;
-          this.$http.post('../change',this.trails[i].children[j]).then(function (response) {
-          },function (response) {});
+          this.$http.post('../change',this.trails[i].children[j]).then(response => {
+              //console.log("Response: ", response);
+              this.trails = response.body;
+          });
           return;
           }
         }
@@ -37,6 +41,11 @@ new Vue({
   }
 });
 
+function respFunc(d) {
+              console.log("Response: ",d);
+              alert("hi!");
+          }
+          
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

@@ -92,8 +92,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/change', (req, res) => {
-  trails.changeOpen(req.body.ID);
-  res.send('POST Request');
+  trails.changeOpen(req.body.ID,res);
+  //res.send('POST Request');
 });
 
 app.get('/json', (req, res) => {
