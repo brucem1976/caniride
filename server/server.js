@@ -119,8 +119,9 @@ app.get('/json', (req, res) => {
     var children = trails.getAllChildren(parents[i].ID);
     parents[i].children = children;
   }
-  var resString = JSON.stringify(parents);
-  res.send(resString);
+  //var resString = JSON.stringify(parents);
+  //res.send(resString);
+  trails.updateAll(res);
 });
 
 
