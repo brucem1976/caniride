@@ -14,9 +14,9 @@ var allTrails = [];
 
 var ref = db.ref("/");
 
-var updateFromDB = () => {
+var updateAll = (res) => {
   ref.once("value", function(snapshot) {
-    console.log("DB retrieved!");
+    console.log("DB retrieved again!");
     allTrails = [];
     snapshot.forEach(function(childSnapshot) {
       var newTrail = {
@@ -25,10 +25,36 @@ var updateFromDB = () => {
       };
       allTrails.push(newTrail);
     });
+    if(!res) {
+      console.log("Initial request: no response");
+      return;
+    }
+    var trails = getAllParents();
+    for(var i=0; i<trails.length; i++) {
+      trails[i].children = getAllChildren(trails[i].ID);
+    }
+    console.log("Sending all trails to client");
+    return res.send(trails);
   });
 };
 
-updateFromDB();
+// var updateFromDB = () => {
+//   ref.once("value", function(snapshot) {
+//     console.log("DB retrieved!");
+//     allTrails = [];
+//     snapshot.forEach(function(childSnapshot) {
+//       var newTrail = {
+//         key: childSnapshot.key,
+//         val: childSnapshot.val()
+//       };
+//       allTrails.push(newTrail);
+//     });
+//   });
+// };
+
+// updateFromDB();
+
+updateAll(null);
 
 var updateTrail = (ID,res) => {
   var key = -1;
@@ -152,25 +178,6 @@ var getAllChildren = (parentID) => {
   return trails;
 };
 
-var updateAll = (res) => {
-  ref.once("value", function(snapshot) {
-    console.log("DB retrieved again!");
-    allTrails = [];
-    snapshot.forEach(function(childSnapshot) {
-      var newTrail = {
-        key: childSnapshot.key,
-        val: childSnapshot.val()
-      };
-      allTrails.push(newTrail);
-    });
-    var trails = getAllParents();
-    for(var i=0; i<trails.length; i++) {
-      trails[i].children = getAllChildren(trails[i].ID);
-    }
-    console.log("Sending all trails to client");
-    return res.send(trails);
-  });
-};
 
 
 module.exports = { getAllParents, getAllChildren, changeOpen, updateAll };
