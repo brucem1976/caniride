@@ -178,6 +178,4 @@ var getAllChildren = (parentID) => {
   return trails;
 };
 
-
-
 module.exports = { getAllParents, getAllChildren, changeOpen, updateAll };
