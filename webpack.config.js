@@ -4,7 +4,7 @@ var webpack = require('webpack')
 module.exports = {
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './public/dist'),
     publicPath: '/dist/',
     filename: 'build.js'
   },
@@ -40,7 +40,17 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    proxy: {
+      '/json': {
+        target: 'http://localhost:3000',
+        secure: false
+      },
+      '/change': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+    }
   },
   performance: {
     hints: false
