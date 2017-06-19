@@ -2,11 +2,11 @@
   <div id="app">
     <ul style="list-style-type:none">
       <li v-for="trail in trails" v-bind:id="trail.ID">
-        <span v-bind:class="'dot dot-' + trail.trailOpen" v-on:click="changeOpen(trail.ID)">
+        <!-- <span v-bind:class="'dot dot-' + trail.trailOpen" v-on:click="changeOpen(trail.ID)">
             <span class="dot-inner">
             </span>
-          </span>
-        {{trail.trailName}}
+          </span> -->
+        <strong>{{trail.trailName}}</strong>
         <ul style="list-style-type:none" v-if="trail.children==[] ? false : true">
           <li v-for="child in trail.children" v-bind:id="child.ID">
             <span v-bind:class="'dot sub-dot-' + child.trailOpen" v-on:click="changeOpen(child.ID)">
@@ -86,8 +86,26 @@ function getParameterByName(name, url) {
 /*Yellow - <span class="dot dot-yellow"><span class="dot-inner"></span></span>*/
 /*Green - <span class="dot dot-green"><span class="dot-inner"></span></span>*/
 
+
 body {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+ul{
+  margin-left:0px;
+  padding-left:20px;
+
+}
+
+ul ul{
+  margin-left:0px;
+  padding-left:20px;
+
+}
+
+ul ul ul{
+  margin-left:0px;
+  padding-left:20px;
+
 }
 
 .dot {
@@ -97,8 +115,8 @@ border-width: 2px;
 border-color: #666;
 padding-top: 6px;
 padding-left: 6px;
-width: 20px;
-height: 20px;
+width: 12px;
+height: 12px;
 display: inline-block;
 border-radius: 50%;
 margin: 0.2em 0.4em 0.2em 0;
@@ -132,18 +150,32 @@ background: #009900;
 
 .sub-dot-false {
 background: #990000;
-width: 15px;
-height:15px;
+width: 8px;
+height:8px;
   
 }
 .sub-dot-true {
 background: #009900;
-width: 15px;
-height:15px;
+width: 8px;
+height:8px;
 }
 .dot-yellow {
 background: #999900;
 }/** add more colors here if you need **/
 
-
+#app {
+  width:220px;
+  border:1px solid black;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  background: #EFEFEF;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-size: 11px;
+  line-height: 1.55;
+  font-family: arial, helvetica, sans-serif;
+}
 </style>
