@@ -164,7 +164,7 @@ background: #999900;
 }/** add more colors here if you need **/
 
 #app {
-  width:220px;
+  width:210px;
   border:1px solid black;
   font-family: 'Helvetica', 'Arial', sans-serif;
   background: #EFEFEF;
