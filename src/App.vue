@@ -88,6 +88,8 @@ function getParameterByName(name, url) {
 
 
 body {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 ul{
@@ -149,7 +151,8 @@ background: #009900;
 }
 
 .sub-dot-false {
-background: #990000;
+/*background: #990000;*/
+background: white;
 width: 8px;
 height:8px;
   
@@ -164,7 +167,7 @@ background: #999900;
 }/** add more colors here if you need **/
 
 #app {
-  width:210px;
+  width:220px;
   border:1px solid black;
   font-family: 'Helvetica', 'Arial', sans-serif;
   background: #EFEFEF;
